@@ -6,6 +6,7 @@ import com.cadCompany.desafio.empresa.Empresa;
 import com.cadCompany.desafio.empresa.EmpresaRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class EmpresaController {
     }
 
     @GetMapping
-    public List<DadosListagemEmpresa> list(){
-        return empresaRepository.findAll().stream().map(DadosListagemEmpresa::new).toList();
+    public List<DadosListagemEmpresa> list(Pageable paginacao){
+        return empresaRepository.findAll(paginacao).stream().map(DadosListagemEmpresa::new).toList();
     }
 }
