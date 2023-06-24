@@ -24,7 +24,9 @@ public class EmpresaController {
 
     @GetMapping
     public List<DadosListagemEmpresa> list(Pageable paginacao){
-        return empresaRepository.findAll(paginacao).stream().map(DadosListagemEmpresa::new).toList();
+        //return empresaRepository.findAll(paginacao).stream().map(DadosListagemEmpresa::new).toList();
+        //Tras as empresas ativas apenas
+        return empresaRepository.findAllByAtivoTrue(paginacao).stream().map(DadosListagemEmpresa::new).toList();
     }
 
     @GetMapping(path = {"/{id}"})
@@ -37,6 +39,19 @@ public class EmpresaController {
     public void atualizar(@RequestBody @Valid DadosAtualizacaoEmpresa dados){
         Empresa empresa = empresaRepository.getReferenceById(dados.id());
         empresa.atualizarDados(dados);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    @Transactional
+    public void excluir(@PathVariable long id){
+        empresaRepository.deleteById(id);
+    }
+
+    @DeleteMapping(path = "/inativar/{id}")
+    @Transactional
+    public void inativar(@PathVariable long id){
+        Empresa empresa = empresaRepository.getReferenceById(id);
+        empresa.inativar();
     }
 
 }

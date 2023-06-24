@@ -40,4 +40,10 @@ public class FornecedorController {
         fornecedor.atualizarFornecedor(dados);
     }
 
+    @DeleteMapping(path = "/{id}")
+    @Transactional
+    public void excluir(@PathVariable long id){
+        fornecedorRepository.deleteById(id);
+    }
+
 }

@@ -21,11 +21,13 @@ public class Empresa {
     private Long id;
     private String nomeFantasia;
     private String cnpj;
+    private Boolean ativo;
 
     @Embedded
     private Endereco endereco;
 
     public Empresa(DadosCadastraisEmpresa dadosCadastraisEmpresa){
+        this.ativo = true;
         this.nomeFantasia = dadosCadastraisEmpresa.nomeFantasia();
         this.cnpj = dadosCadastraisEmpresa.cnpj();
         this.endereco = new Endereco(dadosCadastraisEmpresa.endereco());
@@ -35,5 +37,9 @@ public class Empresa {
         if (dados.nomeFantasia() != null) this.nomeFantasia = dados.nomeFantasia();
         if (dados.cnpj()!= null) this.cnpj = dados.cnpj();
         if (dados.endereco() != null) this.endereco.atualizarEndereco(dados.endereco());
+    }
+
+    public void inativar() {
+        this.ativo = false;
     }
 }
