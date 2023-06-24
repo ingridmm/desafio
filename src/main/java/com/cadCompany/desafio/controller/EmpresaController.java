@@ -1,9 +1,6 @@
 package com.cadCompany.desafio.controller;
 
-import com.cadCompany.desafio.empresa.DadosCadastraisEmpresa;
-import com.cadCompany.desafio.empresa.DadosListagemEmpresa;
-import com.cadCompany.desafio.empresa.Empresa;
-import com.cadCompany.desafio.empresa.EmpresaRepository;
+import com.cadCompany.desafio.empresa.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -29,4 +26,17 @@ public class EmpresaController {
     public List<DadosListagemEmpresa> list(Pageable paginacao){
         return empresaRepository.findAll(paginacao).stream().map(DadosListagemEmpresa::new).toList();
     }
+
+    @GetMapping(path = {"/{id}"})
+    public List<DadosListagemEmpresa> findBydId(@PathVariable long id){
+        return empresaRepository.findById(id).stream().map(DadosListagemEmpresa::new).toList();
+    }
+
+    @PutMapping
+    @Transactional //faz uma escrita BD
+    public void atualizar(@RequestBody @Valid DadosAtualizacaoEmpresa dados){
+        Empresa empresa = empresaRepository.getReferenceById(dados.id());
+        empresa.atualizarDados(dados);
+    }
+
 }

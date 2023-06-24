@@ -1,9 +1,9 @@
 package com.cadCompany.desafio.empresa;
 
-public record DadosListagemEmpresa(String nomeFantasia, String cnpj) {
+public record DadosListagemEmpresa(Long id, String nomeFantasia, String cnpj) {
     /*DTO Listagem Empresa*/
     public DadosListagemEmpresa(Empresa empresa){
-        this(empresa.getNomeFantasia(), empresa.getCnpj());
+        this(empresa.getId(), empresa.getNomeFantasia(), empresa.getCnpj());
     }
 
 }

@@ -30,4 +30,10 @@ public class Empresa {
         this.cnpj = dadosCadastraisEmpresa.cnpj();
         this.endereco = new Endereco(dadosCadastraisEmpresa.endereco());
     }
+
+    public void atualizarDados(DadosAtualizacaoEmpresa dados) {
+        if (dados.nomeFantasia() != null) this.nomeFantasia = dados.nomeFantasia();
+        if (dados.cnpj()!= null) this.cnpj = dados.cnpj();
+        if (dados.endereco() != null) this.endereco.atualizarEndereco(dados.endereco());
+    }
 }
