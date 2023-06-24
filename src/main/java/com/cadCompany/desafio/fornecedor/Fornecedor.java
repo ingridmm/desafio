@@ -1,14 +1,14 @@
 package com.cadCompany.desafio.fornecedor;
 
+import com.cadCompany.desafio.empresa.Empresa;
 import com.cadCompany.desafio.endereco.Endereco;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Table(name = "fornecedor")
 @Entity(name = "fornecedor")
@@ -16,6 +16,7 @@ import java.util.Date;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Getter
+@Setter
 
 public class Fornecedor {
 
@@ -30,6 +31,9 @@ public class Fornecedor {
 
     @Embedded
     private Endereco endereco;
+
+    @ManyToOne
+    private Empresa empresa;
 
     public Fornecedor(DadosCadastraisFornecedor dadosCadastraisFornecedor){
         this.nome = dadosCadastraisFornecedor.nome();
