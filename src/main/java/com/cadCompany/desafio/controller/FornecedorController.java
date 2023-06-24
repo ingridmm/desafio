@@ -1,9 +1,6 @@
 package com.cadCompany.desafio.controller;
 
-import com.cadCompany.desafio.fornecedor.DadosCadastraisFornecedor;
-import com.cadCompany.desafio.fornecedor.DadosListagemFornecedor;
-import com.cadCompany.desafio.fornecedor.ForncedorRepository;
-import com.cadCompany.desafio.fornecedor.Fornecedor;
+import com.cadCompany.desafio.fornecedor.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +26,18 @@ public class FornecedorController {
     @GetMapping
     public List<DadosListagemFornecedor> list(Pageable paginacao){
         return fornecedorRepository.findAll(paginacao).stream().map(DadosListagemFornecedor::new).toList();
+    }
+
+    @GetMapping(path = {"/{id}"})
+    public List<DadosListagemFornecedor> findByIdFornecedor(@PathVariable long id){
+        return fornecedorRepository.findById(id).stream().map(DadosListagemFornecedor::new).toList();
+    }
+
+    @PutMapping
+    @Transactional
+    public void atualizar(@RequestBody @Valid DadosAtualizacaoFornecedor dados){
+        Fornecedor fornecedor = fornecedorRepository.getReferenceById(dados.id());
+        fornecedor.atualizarFornecedor(dados);
     }
 
 }

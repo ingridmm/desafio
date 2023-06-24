@@ -39,4 +39,13 @@ public class Fornecedor {
         this.dataNascimento = dadosCadastraisFornecedor.dataNascimento();
         this.endereco = new Endereco(dadosCadastraisFornecedor.endereco());
     }
+
+    public void atualizarFornecedor(DadosAtualizacaoFornecedor dados) {
+        if(dados.nome()!=null) this.nome = dados.nome();
+        if(dados.cnpjOuCpf()!=null) this.cnpjOuCpf = dados.cnpjOuCpf();
+        if(dados.email()!=null) this.email = dados.email();
+        if(dados.rg()!=null) this.rg = dados.rg();
+        if(dados.dataNascimento()!=null) this.dataNascimento = dados.dataNascimento();
+        if(dados.endereco()!=null) this.endereco.atualizarEndereco(dados.endereco());
+    }
 }
