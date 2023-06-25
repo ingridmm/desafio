@@ -11,6 +11,7 @@ Com funções Cadastrar Fornecedores e Empresas, além de Listar, Alterar e Excl
 - MySQL
 - Lombok
 - Flyway DB
+- React
 
 # Instalação
 O projeto é gerenciado pelo Maven, bastando utilizá-lo em uma IDE;
